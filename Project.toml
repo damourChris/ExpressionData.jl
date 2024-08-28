@@ -1,4 +1,4 @@
-name = "BioData"
+name = "ExpressionData"
 uuid = "479be80e-0d6f-4501-bee0-9ae8a09d31d3"
 authors = ["Chris Damour"]
 version = "1.0.0-DEV"
