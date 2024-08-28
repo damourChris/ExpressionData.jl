@@ -2,6 +2,22 @@ import Base.show
 import Base.==
 import RCall.rcopy
 
+"""
+    ExpressionSet
+
+An `ExpressionSet` object is a container for storing gene expression data, along with associated metadata. 
+It follows the `ExpressionSet` class from the R package from Bioconductor: `Biobase`.
+
+# See also 
+[`MIAME`](@ref)
+[`feature_names`](@ref)
+[`sample_names`](@ref)
+[`expression_values`](@ref)
+[`feature_data`](@ref)
+[`phenotype_data`](@ref)
+[`experiment_data`](@ref)
+[`annotation`](@ref)
+"""
 struct ExpressionSet
     exprs::Matrix{Union{Missing,Float64}}
     phenotype_data::DataFrame
@@ -26,16 +42,32 @@ function ==(eset1::ExpressionSet, eset2::ExpressionSet)
            eset1.annotation == eset2.annotation
 end
 
+"""
+    feature_names(eset::ExpressionSet)::Vector{String}
+
+Extracts the feature names from an ExpressionSet.
+"""
 function feature_names(eset::ExpressionSet)::Vector{String}
     data = feature_data(eset)
     return data[!, :feature_names]
 end
+"""
+    sample_names(eset::ExpressionSet)::Vector{String}
 
+Extracts the sample names from an ExpressionSet.
+"""
 function sample_names(eset::ExpressionSet)::Vector{String}
     data = phenotype_data(eset)
     return data[!, :sample_names]
 end
 
+"""
+    expression_values(eset::ExpressionSet)::DataFrame
+
+Extracts the expression values from an ExpressionSet. The feature names are included as a column.
+ 
+By passing the type `Matrix` as the first argument, the function will return the expression values as a matrix.
+"""
 function expression_values(eset::ExpressionSet)::DataFrame
     df = DataFrame(eset.exprs, sample_names(eset))
     df[!, :feature_names] = feature_names(eset)
@@ -49,14 +81,32 @@ function expression_values(::Type{Matrix}, eset::ExpressionSet)::Matrix
     return eset.exprs
 end
 
+"""
+    feature_data(eset::ExpressionSet)::DataFrame
+
+Extracts the feature data from an ExpressionSet.
+"""
 function feature_data(eset::ExpressionSet)::DataFrame
     return eset.feature_data
 end
 
+"""
+    phenotype_data(eset::ExpressionSet)::DataFrame
+
+Extracts the phenotype data from an ExpressionSet.
+"""
 function phenotype_data(eset::ExpressionSet)::DataFrame
     return eset.phenotype_data
 end
 
+"""
+    experiment_data(eset::ExpressionSet)::MIAME
+
+Extracts the experiment data from an ExpressionSet.
+
+# See also
+[`MIAME`](@ref)
+"""
 function annotation(es::ExpressionSet)::Symbol
     return es.annotation
 end
