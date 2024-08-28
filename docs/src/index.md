@@ -1,14 +1,17 @@
 ```@meta
-CurrentModule = BioData
+CurrentModule = ExpressionData
 ```
 
-# BioData
+# ExpressionData
 
-Documentation for [BioData](https://github.com/damourChris/BioData.jl).
+Documentation for [ExpressionData](https://github.com/damourChris/ExpressionData.jl).
+
+## Contents
+
 
 ```@index
 ```
 
 ```@autodocs
-Modules = [BioData]
+Modules = [ExpressionData]
 ```
