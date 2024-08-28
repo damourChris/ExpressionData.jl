@@ -73,6 +73,6 @@ jobs:
         shell: julia --project=docs --color=yes {0}
         run: |
           using Documenter: DocMeta, doctest
-          using BioData
-          DocMeta.setdocmeta!(BioData, :DocTestSetup, :(using BioData); recursive=true)
-          doctest(BioData)
+          using ExpressionData
+          DocMeta.setdocmeta!(ExpressionData, :DocTestSetup, :(using ExpressionData); recursive=true)
+          doctest(ExpressionData)

@@ -1,23 +1,18 @@
-using BioData
+using ExpressionData
 using Documenter
 
-DocMeta.setdocmeta!(BioData, :DocTestSetup, :(using BioData); recursive=true)
+DocMeta.setdocmeta!(ExpressionData, :DocTestSetup, :(using ExpressionData); recursive=true)
 
 makedocs(;
-    modules=[BioData],
-    authors="Chris Damour",
-    sitename="BioData.jl",
-    format=Documenter.HTML(;
-        canonical="https://damourChris.github.io/BioData.jl",
-        edit_link="main",
-        assets=String[],
-    ),
-    pages=[
-        "Home" => "index.md",
-    ],
-)
+         modules=[ExpressionData],
+         authors="Chris Damour",
+         sitename="ExpressionData.jl",
+         format=Documenter.HTML(;
+                                canonical="https://damourChris.github.io/ExpressionData.jl",
+                                edit_link="main",
+                                assets=String[],),
+         pages=["Home" => "index.md"],)
 
 deploydocs(;
-    repo="github.com/damourChris/BioData.jl",
-    devbranch="main",
-)
+           repo="github.com/damourChris/ExpressionData.jl",
+           devbranch="main",)

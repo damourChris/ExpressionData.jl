@@ -25,7 +25,7 @@ test_eset = ExpressionSet(rand(3, 2), DataFrame(; sample_names=["S1", "S2"]),
                           test_miame,
                           :annotation)
 
-@testset "BioData.jl" begin
+@testset "ExpressionData.jl" begin
     include("./test_expression_set.jl")
     include("./test_miame.jl")
     include("./test_io.jl")
