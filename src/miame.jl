@@ -1,6 +1,7 @@
 using RCall
 
 import Base.show
+import Base.==
 import RCall.rcopy
 
 @kwdef struct MIAME
@@ -28,6 +29,21 @@ function show(m::MIAME)
     println("url: ", m.url)
     println("pub_med_id: ", m.pub_med_id)
     return println("other: ", m.other)
+end
+
+function ==(m1::MIAME, m2::MIAME)
+    return m1.name == m2.name &&
+           m1.lab == m2.lab &&
+           m1.contact == m2.contact &&
+           m1.title == m2.title &&
+           m1.abstract == m2.abstract &&
+           m1.url == m2.url &&
+           m1.pub_med_id == m2.pub_med_id &&
+           m1.samples == m2.samples &&
+           m1.hybridizations == m2.hybridizations &&
+           m1.norm_controls == m2.norm_controls &&
+           m1.preprocessing == m2.preprocessing &&
+           m1.other == m2.other
 end
 
 abstract(m::MIAME) = m.abstract
