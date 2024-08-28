@@ -29,4 +29,8 @@ export ExpressionSet,
        phenotype_data!,
        annotation
 
+include("io.jl")
+export save_eset,
+       load_eset
+
 end
