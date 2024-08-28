@@ -1,4 +1,5 @@
 import Base.show
+import Base.==
 import RCall.rcopy
 
 struct ExpressionSet
@@ -15,6 +16,14 @@ function show(eset::ExpressionSet)
     println("Feature data: $(size(eset.feature_data, 1)) rows and $(size(eset.feature_data, 2)) columns")
     println("Experiment data: $(eset.experiment_data)")
     return println("Annotation: $(eset.annotation)")
+end
+
+function ==(eset1::ExpressionSet, eset2::ExpressionSet)
+    return eset1.exprs == eset2.exprs &&
+           eset1.phenotype_data == eset2.phenotype_data &&
+           eset1.feature_data == eset2.feature_data &&
+           eset1.experiment_data == eset2.experiment_data &&
+           eset1.annotation == eset2.annotation
 end
 
 function feature_names(eset::ExpressionSet)::Vector{String}
