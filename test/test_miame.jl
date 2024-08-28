@@ -83,7 +83,7 @@ end
                      pub_med_id="ID1ID2",
                      other=Dict(:key1 => "value1", :key2 => "value2"))
 
-    @test_broken merge(miame1, miame2) == expected
+    @test merge(miame1, miame2) == expected
 end
 
 # Test rcopy function
