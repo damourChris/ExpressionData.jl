@@ -62,7 +62,19 @@ function ==(m1::MIAME, m2::MIAME)
            m1.other == m2.other
 end
 
+"""
+    abstract(m::MIAME)::String
+
+Extracts the abstract from an MIAME object. 
+"""
 abstract(m::MIAME) = m.abstract
+
+"""
+    info(m::MIAME)::NamedTuple
+
+Returns a `NamedTuple` with the name, lab, contact, title, and url fields of an MIAME object. 
+Similar to the `expinfo` function in the R package from Bioconductor: `Biobase`.    
+"""
 function info(m::MIAME)
     return (; name=m.name,
             lab=m.lab,
@@ -70,11 +82,43 @@ function info(m::MIAME)
             title=m.title,
             url=m.url)
 end
+
+"""
+    hybridizations(m::MIAME)::Vector{String}
+
+Extracts the hybridizations from an MIAME object. 
+"""
 hybridizations(m::MIAME) = m.hybridizations
+
+"""
+    norm_controls(m::MIAME)::Vector{String}
+
+Extracts the normalization controls from an MIAME object such as house keeping genes. 
+"""
 norm_controls(m::MIAME) = m.norm_controls
+
+"""
+    other(m::MIAME)::Dict{Symbol,String}
+
+Extracts the other metadata from an MIAME object. This can include any additional information 
+that is not covered by the other fields.
+
+"""
 other(m::MIAME) = m.other
 notes(m::MIAME) = other(m)
+
+"""
+    preprocessing(m::MIAME)::Vector{String}
+
+Extracts the preprocessing steps from an MIAME object describe the steps taken to process the raw data of the experiment.
+"""
 preprocessing(m::MIAME) = m.preprocessing
+
+"""
+    pub_med_id(m::MIAME)::String
+
+Extracts the pubmed id from an MIAME object. 
+"""
 pub_med_id(m::MIAME) = m.pub_med_id
 
 import Base.merge
