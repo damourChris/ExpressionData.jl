@@ -13,8 +13,9 @@ makedocs(;
                                 assets=String[],),
          pages=["Home" => "index.md",
                 "ExpressionSet" => "expression_set.md",
-                "MIAME" => "miame.jl",
-                "Saving / Loading" => "io.jl"],)
+                "MIAME" => "miame.md",
+                "Saving / Loading" => "io.md",
+                "Reference" => "reference.md"],)
 
 deploydocs(;
            repo="github.com/damourChris/ExpressionData.jl",
