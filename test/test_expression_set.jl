@@ -66,8 +66,7 @@ end
 end
 
 # Test rcopy function
-# @testset "convert a R ExpressionSet into Julia" begin
-begin
+@testset "convert a R ExpressionSet into Julia" begin
     R"""
     eset <- readRDS($test_r_eset_path)[[1]]
     """
