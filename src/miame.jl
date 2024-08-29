@@ -2,7 +2,7 @@ using RCall
 
 import Base.show
 import Base.==
-import RCall.rcopy
+import RCall: rcopy, sexp, sexpclass, protect, unprotect, setclass!, RClass, S4Sxp
 
 """
     MIAME
@@ -196,3 +196,45 @@ function rcopy(::Type{MIAME}, s::Ptr{S4Sxp})
                  pub_med_id=id,
                  other=oth)
 end
+
+function sexp(::Type{RClass{:MIAME}}, miame::MIAME)
+    data = Dict("name" => miame.name,
+                "lab" => miame.lab,
+                "contact" => miame.contact,
+                "title" => miame.title,
+                "abstract" => miame.abstract,
+                "url" => miame.url,
+                "pub_med_id" => miame.pub_med_id,
+                "samples" => miame.samples,
+                "hybridizations" => miame.hybridizations,
+                "norm_controls" => miame.norm_controls,
+                "preprocessing" => miame.preprocessing,
+                "version" => 1,
+                "other" => miame.other)
+
+    R"""
+    library(Biobase)
+
+    miam <- MIAME(
+        name = $(data["name"]),
+        lab = $(data["lab"]),
+        contact = $(data["contact"]),
+        title = $(data["title"]),
+        abstract = $(data["abstract"]),
+        url = $(data["url"]),
+        pubMedIds = $(data["pub_med_id"]),
+        samples = list($(data["samples"])),
+        hybridizations = list($(data["hybridizations"])),
+        normControls = list($(data["norm_controls"])),
+        preprocessing = list($(data["preprocessing"])),
+        other = $(data["other"])
+    )
+
+    """
+
+    miam_r = @rget miam
+
+    return sexp(miam_r)
+end
+
+sexpclass(m::MIAME) = RClass{:MIAME}
