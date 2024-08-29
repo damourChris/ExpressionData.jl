@@ -16,7 +16,8 @@ ExpressionData.save_eset
 
 ## Loading
 
-The [`load_eset`](@ref) function loads gene expression data from a file in a specified format.
+The [`load_eset`](@ref) function loads gene expression data from a file saved through save_eset. 
+Support reading from RDS files is also provided.
 
 ```@docs
 

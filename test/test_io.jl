@@ -8,3 +8,10 @@
 
     @test actual == test_eset
 end
+
+@testset "Loading from RDS files" begin
+    # Load the RDS file
+    actual = load_eset(test_r_eset_path)
+
+    @test typeof(actual) == typeof(test_eset)
+end

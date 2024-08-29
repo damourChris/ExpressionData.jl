@@ -27,6 +27,27 @@ To save an object, use `save_eset`.
 [`save_eset`](@ref)
 """
 function load_eset(file::AbstractString)::ExpressionSet
+    # if the extension is .rds then we load it with readRDS and convert
+    if endswith(file, ".rds")
+        R"""
+        eset_file <- readRDS($file) 
+
+        # Check if the object is an ExpressionSet
+        if (!is(eset_file, "ExpressionSet")) {
+            # Try accessing the first element
+            if (!is(eset_file[[1]], "ExpressionSet")) {
+                stop("The object in the file is not an ExpressionSet")
+            }
+            eset <- eset_file[[1]]
+        }else{
+            eset <- eset_file
+        } 
+        """
+
+        eset_R = @rget eset
+        return convert(ExpressionSet, eset_R)
+    end
+
     data = deserialize(file)
 
     return ExpressionSet(data["exprs"],
