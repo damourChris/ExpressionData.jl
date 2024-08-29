@@ -77,20 +77,6 @@ function merge(m1::MIAME, m2::MIAME)
     new_pub_med_id = m1.pub_med_id * m2.pub_med_id
     new_other = merge(m1.other, m2.other)
 
-    # @info "new_name", new_name, typeof(new_name)
-    # @info "new_lab", new_lab, typeof(new_lab)
-    # @info "new_contact", new_contact, typeof(new_contact)
-    # @info "new_title", new_title, typeof(new_title)
-    # @info "new_abstract", new_abstract, typeof(new_abstract)
-    # @info "new_url", new_url, typeof(new_url)
-    # @info "new_samples", new_samples, typeof(new_samples)
-
-    # @info "new_hybridizations", new_hybridizations, typeof(new_hybridizations)
-    # @info "new_norm_controls", new_norm_controls, typeof(new_norm_controls)
-    # @info "new_preprocessing", new_preprocessing, typeof(new_preprocessing)
-    # @info "new_pub_med_id", new_pub_med_id, typeof(new_pub_med_id)
-    # @info "new_other", new_other, typeof(new_other)
-
     return MIAME(;
                  name=new_name,
                  lab=new_lab,
@@ -137,19 +123,6 @@ function rcopy(::Type{MIAME}, s::Ptr{S4Sxp})
     url = @rget url
     oth = @rget oth
 
-    # @info "na", typeof(na)
-    # @info "c", typeof(c)
-    # @info "abs", typeof(abs)
-    # @info "id", typeof(id)
-    # @info "hyb", typeof(hyb)
-    # @info "pre", typeof(pre)
-    # @info "lab", typeof(lab)
-    # @info "title", typeof(title)
-    # @info "samples", typeof(samples)
-    # @info "nom", typeof(nom)
-    # @info "url", typeof(url)
-    # @info "oth", typeof(oth)
-
     return MIAME(;
                  name=na,
                  lab=lab,
@@ -163,18 +136,4 @@ function rcopy(::Type{MIAME}, s::Ptr{S4Sxp})
                  preprocessing=pre,
                  pub_med_id=id,
                  other=oth)
-
-    # name = convert(String, na)
-    # lab = convert(String, lab)
-    # contact = convert(String, c)
-    # title = convert(String, title)
-    # abstract = convert(String, abs)
-    # url = convert(String, url)
-    # samples = convert(Vector{String}, samples)
-    # hybridizations = convert(Vector{String}, hyb)
-    # norm_controls = convert(Vector{String}, nom)
-    # preprocessing = convert(Vector{String}, pre)
-    # pub_med_ids = convert(Vector{String}, ids)
-    # other = convert(Dict{Symbol,String}, oth)
-
 end
