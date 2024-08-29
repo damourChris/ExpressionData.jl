@@ -12,7 +12,9 @@ makedocs(;
                                 edit_link="main",
                                 assets=String[],),
          pages=["Home" => "index.md",
-                "ExpressionSet" => "expression_set.md"],)
+                "ExpressionSet" => "expression_set.md",
+                "MIAME" => "miame.jl",
+                "Saving / Loading" => "io.jl"],)
 
 deploydocs(;
            repo="github.com/damourChris/ExpressionData.jl",
