@@ -12,6 +12,3 @@ Documentation for [ExpressionData](https://github.com/damourChris/ExpressionData
 ```@index
 ```
 
-```@autodocs
-Modules = [ExpressionData]
-```
