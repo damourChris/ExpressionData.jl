@@ -107,6 +107,15 @@ Extracts the experiment data from an ExpressionSet.
 # See also
 [`MIAME`](@ref)
 """
+function experiment_data(es::ExpressionSet)::MIAME
+    return es.experiment_data
+end
+
+"""
+    annotation(eset::ExpressionSet)::Symbol
+
+Extracts the annotation from an ExpressionSet.
+"""
 function annotation(es::ExpressionSet)::Symbol
     return es.annotation
 end
