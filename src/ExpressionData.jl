@@ -22,11 +22,9 @@ export ExpressionSet,
        sample_names,
        expression_values,
        expression_values,
-       expression_values!,
+       experiment_data,
        feature_data,
-       feature_data!,
        phenotype_data,
-       phenotype_data!,
        annotation
 
 include("io.jl")
