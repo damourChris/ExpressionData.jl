@@ -16,7 +16,6 @@ It follows the `MIAME` class from the R package from Bioconductor: `Biobase`.
 [`hybridizations`](@ref)
 [`norm_controls`](@ref)
 [`other`](@ref)
-[`notes`](@ref)
 [`preprocessing`](@ref)
 [`pub_med_id`](@ref)
 """
