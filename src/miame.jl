@@ -4,6 +4,22 @@ import Base.show
 import Base.==
 import RCall.rcopy
 
+"""
+    MIAME
+
+An `MIAME` object is a container for storing metadata associated with an experiment.
+It follows the `MIAME` class from the R package from Bioconductor: `Biobase`.
+
+# See also 
+[`abstract`](@ref)
+[`info`](@ref)
+[`hybridizations`](@ref)
+[`norm_controls`](@ref)
+[`other`](@ref)
+[`notes`](@ref)
+[`preprocessing`](@ref)
+[`pub_med_id`](@ref)
+"""
 @kwdef struct MIAME
     name::String
     lab::String
