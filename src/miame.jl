@@ -182,6 +182,11 @@ function rcopy(::Type{MIAME}, s::Ptr{S4Sxp})
     url = @rget url
     oth = @rget oth
 
+    # If other is an empty list, then we convert it to a Dict
+    if length(oth) == 0
+        oth = Dict{Symbol,String}()
+    end
+
     return MIAME(;
                  name=na,
                  lab=lab,
