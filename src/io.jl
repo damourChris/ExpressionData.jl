@@ -8,11 +8,11 @@ To load the object back, use `load_eset`.
 [`load_eset`](@ref)
 """
 function save_eset(eset::ExpressionSet, file::AbstractString)
-    return data = Dict("exprs" => eset.exprs,
-                       "feature_data" => eset.feature_data,
-                       "phenotype_data" => eset.phenotype_data,
-                       "experiment_data" => eset.experiment_data,
-                       "annotation" => eset.annotation)
+    data = Dict("exprs" => eset.exprs,
+                "feature_data" => eset.feature_data,
+                "phenotype_data" => eset.phenotype_data,
+                "experiment_data" => eset.experiment_data,
+                "annotation" => eset.annotation)
 
     return serialize(file, data)
 end
