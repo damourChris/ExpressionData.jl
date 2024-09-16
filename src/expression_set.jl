@@ -1,6 +1,6 @@
 import Base.show
 import Base.==
-import RCall.rcopy
+import RCall: rcopy, sexp, sexpclass, protect, unprotect, setclass!, RClass, S4Sxp
 
 """
     ExpressionSet
@@ -148,3 +148,34 @@ function rcopy(::Type{ExpressionSet}, s::Ptr{S4Sxp})
 
     return ExpressionSet(exprs, p_data, f_data, e_data, ann)
 end
+
+function sexp(::Type{RClass{:ExpressionSet}}, eset::ExpressionSet)
+    pheno_data = phenotype_data(eset)
+    feat_data = feature_data(eset)
+    expression_data = expression_values(Matrix, eset)
+
+    edata = experiment_data(eset)
+    @rput edata
+
+    # Create an instance of Expressionset 
+    R"""
+
+    library(Biobase)
+
+    adata <- as.matrix($expression_data)
+    pdata <- new("AnnotatedDataFrame", data = $pheno_data)
+    fdata <- new("AnnotatedDataFrame", data = $feat_data)
+
+    eset <- ExpressionSet(
+        assayData = adata,
+        phenoData = pdata,
+        featureData = fdata,
+        experimentData = edata)
+    """
+
+    eset_r = @rget eset
+
+    return sexp(eset_r)
+end
+
+sexpclass(e::ExpressionSet) = RClass{:ExpressionSet}
