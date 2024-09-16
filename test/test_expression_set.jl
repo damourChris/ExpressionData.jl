@@ -76,3 +76,11 @@ end
 
     @test typeof(actual) == ExpressionSet
 end
+
+@testset "generate a random ExpressionSet" begin
+    actual = rand(ExpressionSet, 3, 2)
+
+    @test typeof(actual) == ExpressionSet
+    @test size(expression_values(actual)) == (2, 4)
+    @test size(sample_names(actual)) == (3,)
+end

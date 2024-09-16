@@ -1,5 +1,6 @@
 import Base.show
 import Base.==
+import Base.rand
 import RCall: rcopy, sexp, sexpclass, protect, unprotect, setclass!, RClass, S4Sxp
 
 """
@@ -179,3 +180,26 @@ function sexp(::Type{RClass{:ExpressionSet}}, eset::ExpressionSet)
 end
 
 sexpclass(e::ExpressionSet) = RClass{:ExpressionSet}
+
+# Create a function to generate random ExpressionSet
+function rand(::Type{ExpressionSet}, n::Int, p::Int)
+    exprs = rand(n, p)
+    pheno_data = DataFrame(; sample_names=["sample_$i" for i in 1:p])
+    feature_data = DataFrame(; feature_names=["$i" for i in 1:n])
+    experiment_data = MIAME(;
+                            name="Name",
+                            lab="Lab",
+                            contact="Contact",
+                            title="Title",
+                            abstract="Abstract",
+                            url="URL",
+                            samples=["sample_$i" for i in 1:p],
+                            hybridizations=["Hybridization1", "Hybridization2"],
+                            norm_controls=["Control1", "Control2"],
+                            preprocessing=["Preprocessing1", "Preprocessing2"],
+                            pub_med_id="ID1",
+                            other=Dict(:key1 => "value1", :key2 => "value2"))
+    annotation = :Random
+
+    return ExpressionSet(exprs, pheno_data, feature_data, experiment_data, annotation)
+end
