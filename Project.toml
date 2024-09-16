@@ -1,7 +1,7 @@
 name = "ExpressionData"
 uuid = "479be80e-0d6f-4501-bee0-9ae8a09d31d3"
 authors = ["Chris Damour"]
-version = "1.0.0"
+version = "1.0.1"
 
 [deps]
 DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
