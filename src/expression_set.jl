@@ -34,7 +34,7 @@ function Base.show(io::IO, eset::ExpressionSet)
             "Phenotype data: $(size(eset.phenotype_data, 1)) rows and $(size(eset.phenotype_data, 2)) columns")
     println(io,
             "Feature data: $(size(eset.feature_data, 1)) rows and $(size(eset.feature_data, 2)) columns")
-    println(io, "Experiment data: $(show(eset.experiment_data))")
+    println("Experiment data: Please use experiment_data() on this struct to print the additional information.")
     return println(io, "Annotation: $(eset.annotation)")
 end
 
