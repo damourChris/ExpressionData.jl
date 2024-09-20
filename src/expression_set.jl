@@ -1,4 +1,4 @@
-import Base.show
+
 import Base.==
 import Base.rand
 import RCall: rcopy, sexp, sexpclass, protect, unprotect, setclass!, RClass, S4Sxp
@@ -27,12 +27,15 @@ struct ExpressionSet
     annotation::Symbol
 end
 
-function show(eset::ExpressionSet)
-    println("ExpressionSet with $(size(eset.exprs, 1)) rows and $(size(eset.exprs, 2)) columns")
-    println("Phenotype data: $(size(eset.phenotype_data, 1)) rows and $(size(eset.phenotype_data, 2)) columns")
-    println("Feature data: $(size(eset.feature_data, 1)) rows and $(size(eset.feature_data, 2)) columns")
-    println("Experiment data: $(eset.experiment_data)")
-    return println("Annotation: $(eset.annotation)")
+function Base.show(io::IO, eset::ExpressionSet)
+    println(io,
+            "ExpressionSet with $(size(eset.exprs, 1)) rows and $(size(eset.exprs, 2)) columns")
+    println(io,
+            "Phenotype data: $(size(eset.phenotype_data, 1)) rows and $(size(eset.phenotype_data, 2)) columns")
+    println(io,
+            "Feature data: $(size(eset.feature_data, 1)) rows and $(size(eset.feature_data, 2)) columns")
+    println(io, "Experiment data: $(eset.experiment_data)")
+    return println(io, "Annotation: $(eset.annotation)")
 end
 
 function ==(eset1::ExpressionSet, eset2::ExpressionSet)
