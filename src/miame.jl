@@ -1,6 +1,5 @@
 using RCall
 
-import Base.show
 import Base.==
 import RCall: rcopy, sexp, sexpclass, protect, unprotect, setclass!, RClass, S4Sxp
 
@@ -34,16 +33,35 @@ It follows the `MIAME` class from the R package from Bioconductor: `Biobase`.
     other::Dict{Symbol,String}
 end
 
-function show(m::MIAME)
-    println("MIAME struct")
-    println("title: ", m.title)
-    println("name: ", m.name)
-    println("lab: ", m.lab)
-    println("contact: ", m.contact)
-    println("abstract: ", m.abstract)
-    println("url: ", m.url)
-    println("pub_med_id: ", m.pub_med_id)
-    return println("other: ", m.other)
+function Base.show(io::IO, mime::MIME"text/plain", miame::MIAME)
+    println(io, "MIAME Information:")
+    println(io, "------------------")
+
+    # Display name and lab
+    println(io, "\nName: $(miame.name)")
+    println(io, "Lab: $(miame.lab)")
+
+    # Display contact information
+    println(io, "\nContact:")
+    println(io, "  Name: $(miame.contact)")
+    println(io, "  Title: $(miame.title)")
+
+    # Display abstract
+    println(io, "\nAbstract:")
+    println(io, "$(miame.abstract)")
+
+    # Display URL and PubMed ID
+    println(io, "\nAdditional Information:")
+    println(io, "  URL: $(miame.url)")
+    println(io, "  PubMed ID: $(miame.pub_med_id)")
+
+    # Display other information
+    if !isempty(miame.other)
+        println(io, "\nOther Information:")
+        for (key, value) in miame.other
+            println(io, "  $key: $(value)")
+        end
+    end
 end
 
 function ==(m1::MIAME, m2::MIAME)
