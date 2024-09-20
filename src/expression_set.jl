@@ -126,7 +126,9 @@ end
 
 function rcopy(::Type{ExpressionSet}, s::Ptr{S4Sxp})
     R"""
-    library(Biobase)    
+    suppressPackageStartupMessages({
+            library(Biobase)
+    })
     sample_names <- sampleNames($s) 
     feature_names <- featureNames($s) 
     annotation <- annotation($s) 

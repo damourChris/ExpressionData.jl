@@ -30,6 +30,10 @@ function load_eset(file::AbstractString)::ExpressionSet
     # if the extension is .rds then we load it with readRDS and convert
     if endswith(file, ".rds")
         R"""
+        suppressPackageStartupMessages({
+            library(Biobase)
+        })
+
         eset_file <- readRDS($file) 
 
         # Check if the object is an ExpressionSet
