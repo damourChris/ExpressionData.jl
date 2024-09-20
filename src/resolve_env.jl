@@ -18,7 +18,7 @@ end
 # Check if LocalPreferences.toml exists
 if !isfile("LocalPreferences.toml")
     # Create a LocalPreferences.toml file
-    open(joinpath(@__DIR__, "LocalPreferences.toml"), "w") do io
+    open(joinpath(dirname(@__DIR__), "LocalPreferences.toml"), "w") do io
         return write(io, """
                [RCall]
                Rhome = "$target_rhome"
