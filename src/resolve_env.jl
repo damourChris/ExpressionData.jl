@@ -3,7 +3,7 @@ using CondaPkg
 using Preferences
 using UUIDs
 
-const RCALL_UUID = UUID("6f49c342-dc21-5d91-9882-a32aef131414")
+
 
 CondaPkg.resolve()
 
@@ -26,6 +26,7 @@ if !isfile("LocalPreferences.toml")
                """)
     end
 else
+    const RCALL_UUID = UUID("6f49c342-dc21-5d91-9882-a32aef131414")
     set_preferences!(RCALL_UUID, "Rhome" => target_rhome, "libR" => target_libr;
                      force=true)
 end
