@@ -1,6 +1,6 @@
 module ExpressionData
 
-include(joinpath(@__DIR__, "resolve_env.jl"))
+include("resolve_env.jl")
 
 using DataFrames
 using JLD2
