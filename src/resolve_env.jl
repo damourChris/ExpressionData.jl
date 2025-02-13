@@ -4,7 +4,6 @@ using Preferences
 using UUIDs
 
 
-
 CondaPkg.resolve()
 
 target_rhome = joinpath(CondaPkg.envdir(), "lib", "R")
@@ -14,6 +13,8 @@ if Sys.iswindows()
 else
     target_libr = joinpath(target_rhome, "lib", "libR.$(Libdl.dlext)")
 end
+
+ENV["R_HOME"] = target_rhome
 
 # Check if LocalPreferences.toml exists
 if !isfile("LocalPreferences.toml")
