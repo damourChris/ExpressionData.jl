@@ -15,19 +15,3 @@ else
 end
 
 ENV["R_HOME"] = target_rhome
-
-# Check if LocalPreferences.toml exists
-if !isfile("LocalPreferences.toml")
-    # Create a LocalPreferences.toml file
-    open(joinpath(dirname(@__DIR__), "LocalPreferences.toml"), "w") do io
-        return write(io, """
-               [RCall]
-               Rhome = "$target_rhome"
-               libR = "$target_libr"
-               """)
-    end
-else
-    const RCALL_UUID = UUID("6f49c342-dc21-5d91-9882-a32aef131414")
-    set_preferences!(RCALL_UUID, "Rhome" => target_rhome, "libR" => target_libr;
-                     force=true)
-end
