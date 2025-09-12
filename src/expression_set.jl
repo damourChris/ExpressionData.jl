@@ -1,15 +1,14 @@
 
 import Base.==
 import Base.rand
-import RCall: rcopy, sexp, sexpclass, protect, unprotect, setclass!, RClass, S4Sxp
 
 """
     ExpressionSet
 
-An `ExpressionSet` object is a container for storing gene expression data, along with associated metadata. 
+An `ExpressionSet` object is a container for storing gene expression data, along with associated metadata.
 It follows the `ExpressionSet` class from the R package from Bioconductor: `Biobase`.
 
-# See also 
+# See also
 [`MIAME`](@ref)
 [`feature_names`](@ref)
 [`sample_names`](@ref)
@@ -69,7 +68,7 @@ end
     expression_values(eset::ExpressionSet)::DataFrame
 
 Extracts the expression values from an ExpressionSet. The feature names are included as a column.
- 
+
 By passing the type `Matrix` as the first argument, the function will return the expression values as a matrix.
 """
 function expression_values(eset::ExpressionSet)::DataFrame
@@ -124,67 +123,7 @@ function annotation(es::ExpressionSet)::Symbol
     return es.annotation
 end
 
-function rcopy(::Type{ExpressionSet}, s::Ptr{S4Sxp})
-    R"""
-    suppressPackageStartupMessages({
-            library(Biobase)
-    })
-    sample_names <- sampleNames($s) 
-    feature_names <- featureNames($s) 
-    annotation <- annotation($s) 
-    e_data <- $s@experimentData
-    """
-
-    sample_names = @rget sample_names
-    feature_names = @rget feature_names
-    annotation = @rget annotation
-    e_data_R = @rget e_data
-
-    exprs = rcopy(Matrix{Float64}, s[:assayData][:exprs])
-
-    p_data = rcopy(DataFrame, s[:phenoData][:data])
-    p_data[!, :sample_names] = sample_names
-
-    f_data = rcopy(DataFrame, s[:featureData][:data])
-    f_data[!, :feature_names] = feature_names
-
-    e_data = rcopy(MIAME, e_data_R)
-
-    ann = Symbol(annotation)
-
-    return ExpressionSet(exprs, p_data, f_data, e_data, ann)
-end
-
-function sexp(::Type{RClass{:ExpressionSet}}, eset::ExpressionSet)
-    pheno_data = phenotype_data(eset)
-    feat_data = feature_data(eset)
-    expression_data = expression_values(Matrix, eset)
-
-    edata = experiment_data(eset)
-    @rput edata
-
-    # Create an instance of Expressionset 
-    R"""
-
-    library(Biobase)
-
-    adata <- as.matrix($expression_data)
-    pdata <- new("AnnotatedDataFrame", data = $pheno_data)
-    fdata <- new("AnnotatedDataFrame", data = $feat_data)
-
-    eset <- ExpressionSet(
-        assayData = adata,
-        phenoData = pdata,
-        featureData = fdata,
-        experimentData = edata)
-    """
-
-    eset_r = @rget eset
-
-    return sexp(eset_r)
-end
-
-sexpclass(e::ExpressionSet) = RClass{:ExpressionSet}
+# Note: R interoperability functions have been moved to ExpressionDataInterop.jl
 
 # Create a function to generate random ExpressionSet
 function rand(::Type{ExpressionSet}, n::Int, p::Int)
@@ -207,4 +146,134 @@ function rand(::Type{ExpressionSet}, n::Int, p::Int)
     annotation = :Random
 
     return ExpressionSet(exprs, pheno_data, feature_data, experiment_data, annotation)
+end
+
+"""
+    subset(eset::ExpressionSet; samples=nothing, features=nothing)
+
+Create a subset of an ExpressionSet by selecting specific samples and/or features.
+
+# Arguments
+- `samples`: Vector of sample names or indices to include
+- `features`: Vector of feature names or indices to include
+
+# Examples
+```julia
+# Subset by sample names
+subset_eset = subset(eset; samples=["sample_1", "sample_2"])
+
+# Subset by feature indices
+subset_eset = subset(eset; features=1:100)
+
+# Subset both
+subset_eset = subset(eset; samples=1:5, features=["gene1", "gene2"])
+```
+"""
+function subset(eset::ExpressionSet; samples=nothing, features=nothing)
+    # Handle sample subsetting
+    if samples !== nothing
+        if samples isa AbstractVector{<:AbstractString}
+            # Sample names provided
+            sample_indices = [findfirst(==(name), sample_names(eset)) for name in samples]
+            if any(isnothing, sample_indices)
+                error("Some sample names not found in ExpressionSet")
+            end
+        else
+            # Sample indices provided
+            sample_indices = samples
+        end
+
+        new_exprs = eset.exprs[:, sample_indices]
+        new_pheno_data = eset.phenotype_data[sample_indices, :]
+        new_samples = eset.experiment_data.samples[sample_indices]
+    else
+        new_exprs = eset.exprs
+        new_pheno_data = eset.phenotype_data
+        new_samples = eset.experiment_data.samples
+    end
+
+    # Handle feature subsetting
+    if features !== nothing
+        if features isa AbstractVector{<:AbstractString}
+            # Feature names provided
+            feature_indices = [findfirst(==(name), feature_names(eset))
+                               for name in features]
+            if any(isnothing, feature_indices)
+                error("Some feature names not found in ExpressionSet")
+            end
+        else
+            # Feature indices provided
+            feature_indices = features
+        end
+
+        new_exprs = new_exprs[feature_indices, :]
+        new_feature_data = eset.feature_data[feature_indices, :]
+    else
+        new_feature_data = eset.feature_data
+    end
+
+    # Create new MIAME with updated sample list
+    new_experiment_data = MIAME(;
+                                name=eset.experiment_data.name,
+                                lab=eset.experiment_data.lab,
+                                contact=eset.experiment_data.contact,
+                                title=eset.experiment_data.title,
+                                abstract=eset.experiment_data.abstract,
+                                url=eset.experiment_data.url,
+                                pub_med_id=eset.experiment_data.pub_med_id,
+                                samples=new_samples,
+                                hybridizations=eset.experiment_data.hybridizations,
+                                norm_controls=eset.experiment_data.norm_controls,
+                                preprocessing=eset.experiment_data.preprocessing,
+                                other=eset.experiment_data.other)
+
+    return ExpressionSet(new_exprs, new_pheno_data, new_feature_data, new_experiment_data,
+                         eset.annotation)
+end
+
+"""
+    combine(esets::Vector{ExpressionSet})
+
+Combine multiple ExpressionSets into a single ExpressionSet.
+All ExpressionSets must have the same features.
+
+# Examples
+```julia
+combined_eset = combine([eset1, eset2, eset3])
+```
+"""
+function combine(esets::Vector{ExpressionSet})
+    if length(esets) == 0
+        error("Cannot combine empty vector of ExpressionSets")
+    end
+
+    if length(esets) == 1
+        return esets[1]
+    end
+
+    # Check that all have same features
+    first_features = feature_names(esets[1])
+    for eset in esets[2:end]
+        if feature_names(eset) != first_features
+            error("All ExpressionSets must have the same features to combine")
+        end
+    end
+
+    # Combine expression data
+    combined_exprs = hcat([eset.exprs for eset in esets]...)
+
+    # Combine phenotype data
+    combined_pheno_data = vcat([eset.phenotype_data for eset in esets]...)
+
+    # Use feature data from first ExpressionSet
+    combined_feature_data = esets[1].feature_data
+
+    # Combine experiment data
+    combined_experiment_data = reduce(merge, [eset.experiment_data for eset in esets])
+
+    # Use annotation from first ExpressionSet
+    combined_annotation = esets[1].annotation
+
+    return ExpressionSet(combined_exprs, combined_pheno_data, combined_feature_data,
+                         combined_experiment_data, combined_annotation)
 end

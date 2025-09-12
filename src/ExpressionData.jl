@@ -1,11 +1,9 @@
 module ExpressionData
 
-include("resolve_env.jl")
-
-using DataFrames
-using JLD2
-using RCall: @rget
-using Serialization
+using Arrow: Arrow
+using DataFrames: DataFrames, DataFrame, Missing, Not, select!
+using HDF5: HDF5, create_group, h5open
+using Serialization: Serialization, deserialize, serialize
 
 include("miame.jl")
 export MIAME,
@@ -27,10 +25,18 @@ export ExpressionSet,
        experiment_data,
        feature_data,
        phenotype_data,
-       annotation
+       annotation,
+       subset,
+       combine
 
 include("io.jl")
 export save_eset,
-       load_eset
+       save_eset_jld2,
+       save_eset_hdf5,
+       save_eset_arrow,
+       load_eset,
+       load_eset_jld2,
+       load_eset_hdf5,
+       load_eset_arrow
 
 end
