@@ -1,0 +1,603 @@
+{
+  "creation": [
+    {
+      "creation_memory": 9256,
+      "creation_time": 1.2125645161290322e-06,
+      "genes": 100,
+      "random_memory": 38200,
+      "random_time": 1.7568e-05,
+      "samples": 10,
+      "size_name": "Small"
+    },
+    {
+      "creation_memory": 900264,
+      "creation_time": 0.000137682,
+      "genes": 1000,
+      "random_memory": 1919120,
+      "random_time": 0.000530938,
+      "samples": 100,
+      "size_name": "Medium"
+    },
+    {
+      "creation_memory": 90001568,
+      "creation_time": 0.074146798,
+      "genes": 10000,
+      "random_memory": 172275992,
+      "random_time": 0.1527408975,
+      "samples": 1000,
+      "size_name": "Large"
+    },
+    {
+      "creation_memory": 90001568,
+      "creation_time": 0.0673865975,
+      "genes": 100000,
+      "random_memory": 190815424,
+      "random_time": 0.18152568,
+      "samples": 100,
+      "size_name": "Large (Genes)"
+    },
+    {
+      "creation_memory": 90001568,
+      "creation_time": 0.073590301,
+      "genes": 100,
+      "random_memory": 190815424,
+      "random_time": 0.1914137445,
+      "samples": 100000,
+      "size_name": "Large (Samples)"
+    }
+  ],
+  "data_access": [
+    {
+      "genes": 100,
+      "operations": [
+        {
+          "memory": 3616,
+          "name": "expression_values (DataFrame)",
+          "time": 4.497555555555556e-06
+        },
+        {
+          "memory": 0,
+          "name": "expression_values (Matrix)",
+          "time": 4.5545e-09
+        },
+        {
+          "memory": 0,
+          "name": "feature_names",
+          "time": 4.382e-09
+        },
+        {
+          "memory": 0,
+          "name": "sample_names",
+          "time": 4.477e-09
+        },
+        {
+          "memory": 1408,
+          "name": "phenotype_data",
+          "time": 1.6765e-06
+        },
+        {
+          "memory": 2192,
+          "name": "feature_data",
+          "time": 2.81265e-06
+        },
+        {
+          "memory": 0,
+          "name": "experiment_data",
+          "time": 4.0865e-09
+        }
+      ],
+      "samples": 10,
+      "size_name": "Small"
+    },
+    {
+      "genes": 1000,
+      "operations": [
+        {
+          "memory": 18544,
+          "name": "expression_values (DataFrame)",
+          "time": 3.8066e-05
+        },
+        {
+          "memory": 0,
+          "name": "expression_values (Matrix)",
+          "time": 4.023e-09
+        },
+        {
+          "memory": 0,
+          "name": "feature_names",
+          "time": 4.266e-09
+        },
+        {
+          "memory": 0,
+          "name": "sample_names",
+          "time": 4.643e-09
+        },
+        {
+          "memory": 2192,
+          "name": "phenotype_data",
+          "time": 2.68555e-06
+        },
+        {
+          "memory": 9352,
+          "name": "feature_data",
+          "time": 2.8279444444444445e-06
+        },
+        {
+          "memory": 0,
+          "name": "experiment_data",
+          "time": 4.592e-09
+        }
+      ],
+      "samples": 100,
+      "size_name": "Medium"
+    },
+    {
+      "genes": 10000,
+      "operations": [
+        {
+          "memory": 218536,
+          "name": "expression_values (DataFrame)",
+          "time": 0.000794457
+        },
+        {
+          "memory": 0,
+          "name": "expression_values (Matrix)",
+          "time": 4.252e-09
+        },
+        {
+          "memory": 0,
+          "name": "feature_names",
+          "time": 4.438000000000001e-09
+        },
+        {
+          "memory": 0,
+          "name": "sample_names",
+          "time": 4.391e-09
+        },
+        {
+          "memory": 9352,
+          "name": "phenotype_data",
+          "time": 3.3818999999999998e-06
+        },
+        {
+          "memory": 81352,
+          "name": "feature_data",
+          "time": 1.1027e-05
+        },
+        {
+          "memory": 0,
+          "name": "experiment_data",
+          "time": 4.577e-09
+        }
+      ],
+      "samples": 1000,
+      "size_name": "Large"
+    },
+    {
+      "genes": 100000,
+      "operations": [
+        {
+          "memory": 18544,
+          "name": "expression_values (DataFrame)",
+          "time": 4.61005e-05
+        },
+        {
+          "memory": 0,
+          "name": "expression_values (Matrix)",
+          "time": 4.338e-09
+        },
+        {
+          "memory": 0,
+          "name": "feature_names",
+          "time": 4.208e-09
+        },
+        {
+          "memory": 0,
+          "name": "sample_names",
+          "time": 4.1159999999999994e-09
+        },
+        {
+          "memory": 2192,
+          "name": "phenotype_data",
+          "time": 1.5175833333333332e-06
+        },
+        {
+          "memory": 801352,
+          "name": "feature_data",
+          "time": 8.26325e-05
+        },
+        {
+          "memory": 0,
+          "name": "experiment_data",
+          "time": 4.294499999999999e-09
+        }
+      ],
+      "samples": 100,
+      "size_name": "Large (Genes)"
+    },
+    {
+      "genes": 100,
+      "operations": [
+        {
+          "memory": 16175904,
+          "name": "expression_values (DataFrame)",
+          "time": 0.174785901
+        },
+        {
+          "memory": 0,
+          "name": "expression_values (Matrix)",
+          "time": 4.098e-09
+        },
+        {
+          "memory": 0,
+          "name": "feature_names",
+          "time": 4.1459999999999995e-09
+        },
+        {
+          "memory": 0,
+          "name": "sample_names",
+          "time": 4.477e-09
+        },
+        {
+          "memory": 801352,
+          "name": "phenotype_data",
+          "time": 0.0001041125
+        },
+        {
+          "memory": 2192,
+          "name": "feature_data",
+          "time": 1.676391129032258e-06
+        },
+        {
+          "memory": 0,
+          "name": "experiment_data",
+          "time": 4.283e-09
+        }
+      ],
+      "samples": 100000,
+      "size_name": "Large (Samples)"
+    }
+  ],
+  "data_manipulation": [
+    {
+      "genes": 100,
+      "operations": [
+        {
+          "memory": 5256,
+          "name": "subset by samples",
+          "time": 2.5856e-06
+        },
+        {
+          "memory": 5928,
+          "name": "subset by features",
+          "time": 3.854611111111111e-06
+        },
+        {
+          "memory": 8688,
+          "name": "subset by both",
+          "time": 3.466111111111111e-06
+        },
+        {
+          "memory": 20280,
+          "name": "combine datasets",
+          "time": 3.1602222222222222e-06
+        }
+      ],
+      "samples": 10,
+      "size_name": "Small"
+    },
+    {
+      "genes": 1000,
+      "operations": [
+        {
+          "memory": 45768,
+          "name": "subset by samples",
+          "time": 1.34135e-05
+        },
+        {
+          "memory": 46440,
+          "name": "subset by features",
+          "time": 1.855e-05
+        },
+        {
+          "memory": 49200,
+          "name": "subset by both",
+          "time": 1.5534e-05
+        },
+        {
+          "memory": 1809032,
+          "name": "combine datasets",
+          "time": 0.0003337595
+        }
+      ],
+      "samples": 100,
+      "size_name": "Medium"
+    },
+    {
+      "genes": 10000,
+      "operations": [
+        {
+          "memory": 450760,
+          "name": "subset by samples",
+          "time": 9.72585e-05
+        },
+        {
+          "memory": 451432,
+          "name": "subset by features",
+          "time": 0.000229385
+        },
+        {
+          "memory": 454192,
+          "name": "subset by both",
+          "time": 0.0001140365
+        },
+        {
+          "memory": 180054608,
+          "name": "combine datasets",
+          "time": 0.111189817
+        }
+      ],
+      "samples": 1000,
+      "size_name": "Large"
+    },
+    {
+      "genes": 100000,
+      "operations": [
+        {
+          "memory": 4500744,
+          "name": "subset by samples",
+          "time": 0.0011500395
+        },
+        {
+          "memory": 46440,
+          "name": "subset by features",
+          "time": 2.80455e-05
+        },
+        {
+          "memory": 4504176,
+          "name": "subset by both",
+          "time": 0.0011919685
+        },
+        {
+          "memory": 180011776,
+          "name": "combine datasets",
+          "time": 0.115429299
+        }
+      ],
+      "samples": 100,
+      "size_name": "Large (Genes)"
+    },
+    {
+      "genes": 100,
+      "operations": [
+        {
+          "memory": 5256,
+          "name": "subset by samples",
+          "time": 1.96405e-06
+        },
+        {
+          "memory": 45001384,
+          "name": "subset by features",
+          "time": 0.039953096
+        },
+        {
+          "memory": 8688,
+          "name": "subset by both",
+          "time": 4.439e-06
+        },
+        {
+          "memory": 184804176,
+          "name": "combine datasets",
+          "time": 0.1392032
+        }
+      ],
+      "samples": 100000,
+      "size_name": "Large (Samples)"
+    }
+  ],
+  "io_operations": [
+    {
+      "formats": [
+        {
+          "file_size": 19960,
+          "format_name": "JLD2",
+          "load_memory": 213424,
+          "load_time": 0.0006797615,
+          "save_memory": 233080,
+          "save_time": 0.0084631675
+        },
+        {
+          "file_size": 24451,
+          "format_name": "HDF5",
+          "load_memory": 30712,
+          "load_time": 0.002274741,
+          "save_memory": 14744,
+          "save_time": 0.001809868
+        },
+        {
+          "file_size": 19490,
+          "format_name": "Arrow",
+          "load_memory": 76624,
+          "load_time": 0.001337643,
+          "save_memory": 98976,
+          "save_time": 0.002876502
+        },
+        {
+          "file_size": 10422,
+          "format_name": "Julia Serialization",
+          "load_memory": 46504,
+          "load_time": 0.0002490635,
+          "save_memory": 37952,
+          "save_time": 0.000206969
+        }
+      ],
+      "genes": 100,
+      "samples": 10,
+      "size_name": "Small"
+    },
+    {
+      "formats": [
+        {
+          "file_size": 954286,
+          "format_name": "JLD2",
+          "load_memory": 9943848,
+          "load_time": 0.0124049835,
+          "save_memory": 43260032,
+          "save_time": 0.110496104
+        },
+        {
+          "file_size": 866571,
+          "format_name": "HDF5",
+          "load_memory": 2604512,
+          "load_time": 0.004481541,
+          "save_memory": 1097944,
+          "save_time": 0.005023053
+        },
+        {
+          "file_size": 905258,
+          "format_name": "Arrow",
+          "load_memory": 1557968,
+          "load_time": 0.004652134,
+          "save_memory": 3761968,
+          "save_time": 0.011741088
+        },
+        {
+          "file_size": 912412,
+          "format_name": "Julia Serialization",
+          "load_memory": 10366888,
+          "load_time": 0.0175827295,
+          "save_memory": 6807576,
+          "save_time": 0.0169273675
+        }
+      ],
+      "genes": 1000,
+      "samples": 100,
+      "size_name": "Medium"
+    },
+    {
+      "formats": [
+        {
+          "file_size": 90529518,
+          "format_name": "JLD2",
+          "load_memory": 971772512,
+          "load_time": 1.494074544,
+          "save_memory": 3538777688,
+          "save_time": 7.758768569
+        },
+        {
+          "file_size": 80580945,
+          "format_name": "HDF5",
+          "load_memory": 210680768,
+          "load_time": 0.199319612,
+          "save_memory": 124571872,
+          "save_time": 0.1830191105
+        },
+        {
+          "file_size": 81052058,
+          "format_name": "Arrow",
+          "load_memory": 109965496,
+          "load_time": 0.11999982,
+          "save_memory": 911682792,
+          "save_time": 0.990143566
+        },
+        {
+          "file_size": 90132114,
+          "format_name": "Julia Serialization",
+          "load_memory": 695075416,
+          "load_time": 1.497364045,
+          "save_memory": 3735153160,
+          "save_time": 3.4692914035
+        }
+      ],
+      "genes": 10000,
+      "samples": 1000,
+      "size_name": "Large"
+    },
+    {
+      "formats": [
+        {
+          "file_size": 94806318,
+          "format_name": "JLD2",
+          "load_memory": 984856248,
+          "load_time": 1.423444469,
+          "save_memory": 7362147216,
+          "save_time": 8.186439651
+        },
+        {
+          "file_size": 84829067,
+          "format_name": "HDF5",
+          "load_memory": 337284880,
+          "load_time": 0.258527299,
+          "save_memory": 148086976,
+          "save_time": 0.2275590305
+        },
+        {
+          "file_size": 89105258,
+          "format_name": "Arrow",
+          "load_memory": 115757064,
+          "load_time": 0.107030007,
+          "save_memory": 612841256,
+          "save_time": 0.8465907865
+        },
+        {
+          "file_size": 91290418,
+          "format_name": "Julia Serialization",
+          "load_memory": 719628336,
+          "load_time": 1.5233175655,
+          "save_memory": 2344610336,
+          "save_time": 2.488381232
+        }
+      ],
+      "genes": 100000,
+      "samples": 100,
+      "size_name": "Large (Genes)"
+    },
+    {
+      "formats": [
+        {
+          "file_size": 94811104,
+          "format_name": "JLD2",
+          "load_memory": 984872152,
+          "load_time": 1.4603863185,
+          "save_memory": 6807395560,
+          "save_time": 9.035785017
+        },
+        {
+          "file_size": 89634723,
+          "format_name": "HDF5",
+          "load_memory": 305582144,
+          "load_time": 0.30808876,
+          "save_memory": 190625288,
+          "save_time": 0.256464263
+        },
+        {
+          "file_size": 95929978,
+          "format_name": "Arrow",
+          "load_memory": 647876312,
+          "load_time": 1.113800831,
+          "save_memory": 2561963512,
+          "save_time": 2.8024966205
+        },
+        {
+          "file_size": 91490218,
+          "format_name": "Julia Serialization",
+          "load_memory": 1301320696,
+          "load_time": 1.780036852,
+          "save_memory": 1803425088,
+          "save_time": 2.55419978
+        }
+      ],
+      "genes": 100,
+      "samples": 100000,
+      "size_name": "Large (Samples)"
+    }
+  ],
+  "metadata": {
+    "cpu": "12 \u00d7 12th Gen Intel(R) Core(TM) i7-1255U",
+    "julia_commit": "9615af0f269 (2025-07-09 12:58 UTC)",
+    "julia_version": "1.11.6",
+    "platform": "Linux (x86_64-linux-gnu)",
+    "threads": 12,
+    "timestamp": "2025-09-12T23:14:42.804"
+  }
+}
