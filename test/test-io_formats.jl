@@ -30,9 +30,9 @@ end
         actual = load_eset_arrow(path)
 
         @test size(actual.exprs) == size(test_eset.exprs)
-        @test actual.phenotype_data.sample_names == test_eset.phenotype_data.sample_names
-        @test actual.feature_data.feature_names == test_eset.feature_data.feature_names
-        @test actual.annotation == test_eset.annotation
+        @test sample_names(actual) == sample_names(test_eset)
+        @test feature_names(actual) == feature_names(test_eset)
+        @test annotation(actual) == annotation(test_eset)
 
         # Note: Arrow format loses some MIAME metadata by design
         @test actual.experiment_data.lab == test_eset.experiment_data.lab
