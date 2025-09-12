@@ -137,7 +137,17 @@ function _get_feature_index(eset::ExpressionSet)::Dict{String,Int}
 end
 
 # Fast accessor functions
+"""
+feature_names(eset::ExpressionSet)::Vector{String}
+
+Get the feature names.
+"""
 feature_names(eset::ExpressionSet)::Vector{String} = eset.feature_names
+
+"""
+sample_names(eset::ExpressionSet)::Vector{String}
+Get the sample names.
+"""
 sample_names(eset::ExpressionSet)::Vector{String} = eset.sample_names
 
 """
@@ -236,6 +246,10 @@ Returns the experiment metadata. May be Nothing if no metadata was provided.
 """
 experiment_data(eset::ExpressionSet)::Union{MIAME,Nothing} = eset.experiment_data
 
+"""
+    annotation(eset::ExpressionSet)::Symbol
+Get the annotation source (e.g. :Ensembl, :RefSeq, :none).
+"""
 annotation(eset::ExpressionSet)::Symbol = eset.annotation
 
 """
