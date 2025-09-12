@@ -3,6 +3,7 @@ module ExpressionData
 using Arrow: Arrow
 using DataFrames: DataFrames, DataFrame, Missing, Not, select!
 using HDF5: HDF5, create_group, h5open
+using JLD2: JLD2, load, save
 using Serialization: Serialization, deserialize, serialize
 
 include("miame.jl")
@@ -21,11 +22,13 @@ export ExpressionSet,
        feature_names,
        sample_names,
        expression_values,
-       expression_values,
        experiment_data,
        feature_data,
        phenotype_data,
        annotation,
+       get_sample_metadata,
+       get_feature_metadata,
+       has_experiment_data,
        subset,
        combine
 

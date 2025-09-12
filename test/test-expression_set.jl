@@ -72,7 +72,8 @@ end
 
     @test typeof(actual) == ExpressionSet
     @test size(expression_values(actual)) == (3, 3)  # 3 features, 3 columns (feature_names + 2 samples)
-    @test size(sample_names(actual)) == (2,)  # 2 samples
+    @test length(sample_names(actual)) == 2  # 2 samples
+    @test length(feature_names(actual)) == 3  # 3 features
 end
 
 @testset "subset ExpressionSet by samples" begin
@@ -96,14 +97,18 @@ end
 @testset "combine ExpressionSets" begin
     # Create two compatible ExpressionSets
     eset1 = ExpressionSet(rand(3, 2),
-                          DataFrame(; sample_names=["S1", "S2"]),
-                          DataFrame(; feature_names=["A", "B", "C"]),
+                          ["S1", "S2"],
+                          ["A", "B", "C"],
+                          Dict{Symbol,Vector{Any}}(),
+                          Dict{Symbol,Vector{Any}}(),
                           test_miame,
                           :test1)
 
     eset2 = ExpressionSet(rand(3, 2),
-                          DataFrame(; sample_names=["S3", "S4"]),
-                          DataFrame(; feature_names=["A", "B", "C"]),
+                          ["S3", "S4"],
+                          ["A", "B", "C"],
+                          Dict{Symbol,Vector{Any}}(),
+                          Dict{Symbol,Vector{Any}}(),
                           test_miame,
                           :test2)
 

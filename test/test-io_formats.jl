@@ -7,8 +7,10 @@
         actual = load_eset_hdf5(path)
 
         @test actual.exprs == test_eset.exprs
-        @test actual.phenotype_data == test_eset.phenotype_data
-        @test actual.feature_data == test_eset.feature_data
+        @test actual.sample_names == test_eset.sample_names
+        @test actual.feature_names == test_eset.feature_names
+        @test actual.sample_metadata == test_eset.sample_metadata
+        @test actual.feature_metadata == test_eset.feature_metadata
         @test actual.experiment_data == test_eset.experiment_data
         @test actual.annotation == test_eset.annotation
 

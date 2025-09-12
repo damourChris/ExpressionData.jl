@@ -19,9 +19,11 @@ test_miame = MIAME(;
                    other=Dict(:key1 => "value1", :key2 => "value2"))
 
 test_eset = ExpressionSet(rand(3, 2),
-                          DataFrame(; sample_names=["S1", "S2"]),
-                          DataFrame(; feature_names=["A", "B", "C"]),
-                          test_miame,
+                          ["S1", "S2"],  # sample_names
+                          ["A", "B", "C"],  # feature_names
+                          Dict{Symbol,Vector{Any}}(),  # sample_metadata
+                          Dict{Symbol,Vector{Any}}(),  # feature_metadata
+                          test_miame,  # experiment_data
                           :annotation)
 
 #=
