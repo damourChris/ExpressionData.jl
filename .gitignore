@@ -1,9 +1,12 @@
 *.jl.*.cov
 *.jl.cov
 *.jl.mem
-/docs/Manifest.toml
-/docs/build/
-
+*.rej
+.DS_Store
+.benchmarkci
 .CondaPkg
 Manifest.toml
-LocalPreferences.toml
+benchmark/*.json
+coverage
+docs/build/
+env

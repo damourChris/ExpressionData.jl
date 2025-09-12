@@ -3,7 +3,6 @@ using CondaPkg
 using Preferences
 using UUIDs
 
-
 CondaPkg.resolve()
 
 target_rhome = joinpath(CondaPkg.envdir(), "lib", "R")

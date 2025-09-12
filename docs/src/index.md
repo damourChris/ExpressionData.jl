@@ -8,7 +8,5 @@ Documentation for [ExpressionData](https://github.com/damourChris/ExpressionData
 
 ## Contents
 
-
 ```@index
 ```
-
