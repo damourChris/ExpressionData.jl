@@ -1,0 +1,39 @@
+# Changes here will be overwritten by Copier
+AddAllcontributors: false
+AddCitationCFF: true
+AddCodeOfConduct: false
+AddCompatHelperCI: true
+AddCopierCI: true
+AddDependabot: true
+AddDocs: false
+AddDocsCI: true
+AddFormatterAndLinterConfigFiles: true
+AddGitHubPRTemplate: true
+AddGitHubTemplates: false
+AddLintCI: true
+AddLychee: true
+AddMacToCI: true
+AddPrecommit: true
+AddTagBotCI: true
+AddTestCI: true
+AddWinToCI: true
+Authors: Chris Damour
+AutoIncludeTests: true
+CheckExplicitImports: true
+ConfigIndentation: 2
+ExplicitImportsChecklist: exclude_all_qualified_accesses_are_public
+JuliaIndentation: 4
+JuliaMinCIVersion: lts
+JuliaMinVersion: 1.6.7
+License: MIT
+LicenseCopyrightHolders: Chris Damour
+MarkdownIndentation: 2
+PackageName: ExpressionData
+PackageOwner: damourChris
+PackageUUID: 479be80e-0d6f-4501-bee0-9ae8a09d31d3
+RunJuliaNightlyOnCI: true
+StrategyConfirmIncluded: true
+StrategyLevel: 2
+StrategyReviewExcluded: false
+UseCirrusCI: true
+_src_path: /home/damourchris/.julia/packages/BestieTemplate/jdG8v

@@ -34,7 +34,7 @@ function load_eset(file::AbstractString)::ExpressionSet
             library(Biobase)
         })
 
-        eset_file <- readRDS($file) 
+        eset_file <- readRDS($file)
 
         # Check if the object is an ExpressionSet
         if (!is(eset_file, "ExpressionSet")) {
@@ -45,7 +45,7 @@ function load_eset(file::AbstractString)::ExpressionSet
             eset <- eset_file[[1]]
         }else{
             eset <- eset_file
-        } 
+        }
         """
 
         eset_R = @rget eset

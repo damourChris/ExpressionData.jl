@@ -31,19 +31,19 @@ Without MRE, we would only be able to help you to a limited extent, and attentio
 
 **Environment (please complete the following information):**
 
-  - Output of `using Pkg; Pkg.status()`
+- Output of `using Pkg; Pkg.status()`
 
 ```julia
 
 ```
 
-  - Output of `using Pkg; Pkg.status(; mode = PKGMODE_MANIFEST)`
+- Output of `using Pkg; Pkg.status(; mode = PKGMODE_MANIFEST)`
 
 ```julia
 
 ```
 
-  - Output of `versioninfo()`
+- Output of `versioninfo()`
 
 ```julia
 
