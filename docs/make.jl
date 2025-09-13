@@ -11,6 +11,7 @@ makedocs(;
                                 canonical="https://damourChris.github.io/ExpressionData.jl",
                                 edit_link="main",
                                 assets=String[],),
+         checkdocs=:export,
          pages=["Home" => "index.md",
                 "ExpressionSet" => "expression_set.md",
                 "MIAME" => "miame.md",
