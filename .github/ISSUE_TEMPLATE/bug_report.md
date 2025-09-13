@@ -7,15 +7,15 @@ assignees: ''
 
 ---
 
-**Describe the bug 🐞**
+### Describe the bug 🐞
 
 A clear and concise description of what the bug is.
 
-**Expected behavior**
+### Expected behavior
 
 A clear and concise description of what you expected to happen.
 
-**Minimal Reproducible Example 👇**
+### Minimal Reproducible Example 👇
 
 Without MRE, we would only be able to help you to a limited extent, and attention to the issue would be limited. to know more about MRE refer to [wikipedia](https://en.wikipedia.org/wiki/Minimal_reproducible_example).
 
@@ -23,13 +23,13 @@ Without MRE, we would only be able to help you to a limited extent, and attentio
 
 ```
 
-**Error & Stacktrace ⚠️**
+### Error & Stacktrace ⚠️
 
 ```julia
 
 ```
 
-**Environment (please complete the following information):**
+### Environment (please complete the following information)
 
 - Output of `using Pkg; Pkg.status()`
 
@@ -49,6 +49,6 @@ Without MRE, we would only be able to help you to a limited extent, and attentio
 
 ```
 
-**Additional context**
+### Additional context
 
 Add any other context about the problem here.
