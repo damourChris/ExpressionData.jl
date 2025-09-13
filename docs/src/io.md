@@ -8,10 +8,14 @@ The `ExpressionData` package provides functions for saving and loading gene expr
 
 ## Supported Formats
 
-- **JLD2** (`.jld2`): Recommended for Julia-to-Julia workflows. Fast, efficient, and preserves all data types.
-- **HDF5** (`.h5`, `.hdf5`): Cross-platform format with excellent compression, widely supported.
+- **HDF5** (`.h5`, `.hdf5`): Cross-platform format with excellent compression, widely supported. Recommended for large datasets.
+- **JLD2** (`.jld2`): Julia-specific format.
 - **Arrow** (`.arrow`): Columnar format optimized for analytical workloads, good for data exchange.
 - **Julia Serialization** (`.jls`, `.dat`): Native Julia serialization for quick prototyping.
+
+## Large Datasets
+
+For large datasets, HDF5 is recommended due to its efficient storage and access patterns. The `save_eset_hdf5` and `load_eset_hdf5` functions handle HDF5 files.
 
 ## Saving
 
@@ -39,8 +43,8 @@ ExpressionData.load_eset_arrow
 
 ```julia
 # Save in different formats
-save_eset(my_eset, "data.jld2")    # JLD2 format (recommended)
-save_eset(my_eset, "data.h5")      # HDF5 format
+save_eset(my_eset, "data.h5")      # HDF5 format (recommended)
+save_eset(my_eset, "data.jld2")    # JLD2 format
 save_eset(my_eset, "data.arrow")   # Arrow format
 save_eset(my_eset, "data.jls")     # Julia serialization
 

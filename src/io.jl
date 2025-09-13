@@ -34,7 +34,9 @@ end
     save_eset(eset::ExpressionSet, file::AbstractString)
 
 Saves an `ExpressionSet` object to a file. Supports multiple Julia-native formats:
-- `.jld2`: JLD2 format (recommended for performance and cross-session compatibility)
+- `.jld2`: JLD2 format
+- `.h5` or `.hdf5`: HDF5 format (default if no extension is provided)
+- `.arrow`: Apache Arrow format
 - `.jls` or `.dat`: Julia serialization format
 
 To load the object back, use `load_eset`.
@@ -52,8 +54,9 @@ function save_eset(eset::ExpressionSet, file::AbstractString)
     elseif endswith(file, ".jls") || endswith(file, ".dat")
         return serialize(file, eset)
     else
-        # Default to JLD2 format
-        return save_eset_jld2(eset, file * ".jld2")
+        # Default to HDF5 if no extension is provided
+        @warn "No recognized file extension provided. Defaulting to HDF5 format."
+        return save_eset_hdf5(eset, file * ".h5")
     end
 end
 
