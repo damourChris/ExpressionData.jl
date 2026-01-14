@@ -6,4 +6,6 @@ CurrentModule = ExpressionData
 
 ```@autodocs ; canonical=false
 Modules = [ExpressionData]
+Public = true
+Order = [:type, :function]
 ```

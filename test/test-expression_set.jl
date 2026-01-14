@@ -65,22 +65,57 @@ end
     @test actual == expected
 end
 
-# Test rcopy function
-@testset "convert a R ExpressionSet into Julia" begin
-    R"""
-    eset <- readRDS($test_r_eset_path)[[1]]
-    """
-    eset_R = @rget eset
-
-    actual = convert(ExpressionSet, eset_R)
-
-    @test typeof(actual) == ExpressionSet
-end
+# Note: R conversion tests moved to ExpressionDataInterop.jl
 
 @testset "generate a random ExpressionSet" begin
     actual = rand(ExpressionSet, 3, 2)
 
     @test typeof(actual) == ExpressionSet
-    @test size(expression_values(actual)) == (2, 4)
-    @test size(sample_names(actual)) == (3,)
+    @test size(expression_values(actual)) == (3, 3)  # 3 features, 3 columns (feature_names + 2 samples)
+    @test length(sample_names(actual)) == 2  # 2 samples
+    @test length(feature_names(actual)) == 3  # 3 features
+end
+
+@testset "subset ExpressionSet by samples" begin
+    # Test subsetting by sample names
+    subset_eset = ExpressionData.subset(test_eset; samples=["S1"])
+
+    @test size(subset_eset.exprs) == (3, 1)
+    @test sample_names(subset_eset) == ["S1"]
+    @test feature_names(subset_eset) == ["A", "B", "C"]
+end
+
+@testset "subset ExpressionSet by features" begin
+    # Test subsetting by feature names
+    subset_eset = ExpressionData.subset(test_eset; features=["A", "B"])
+
+    @test size(subset_eset.exprs) == (2, 2)
+    @test sample_names(subset_eset) == ["S1", "S2"]
+    @test feature_names(subset_eset) == ["A", "B"]
+end
+
+@testset "combine ExpressionSets" begin
+    # Create two compatible ExpressionSets
+    eset1 = ExpressionSet(rand(3, 2),
+                          ["S1", "S2"],
+                          ["A", "B", "C"],
+                          Dict{Symbol,Vector{Any}}(),
+                          Dict{Symbol,Vector{Any}}(),
+                          test_miame,
+                          :test1)
+
+    eset2 = ExpressionSet(rand(3, 2),
+                          ["S3", "S4"],
+                          ["A", "B", "C"],
+                          Dict{Symbol,Vector{Any}}(),
+                          Dict{Symbol,Vector{Any}}(),
+                          test_miame,
+                          :test2)
+
+    combined = ExpressionData.combine([eset1, eset2])
+
+    @test size(combined.exprs) == (3, 4)
+    @test length(sample_names(combined)) == 4
+    @test sample_names(combined) == ["S1", "S2", "S3", "S4"]
+    @test feature_names(combined) == ["A", "B", "C"]
 end

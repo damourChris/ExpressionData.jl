@@ -1,7 +1,4 @@
-using RCall
-
 import Base.==
-import RCall: rcopy, sexp, sexpclass, protect, unprotect, setclass!, RClass, S4Sxp
 
 """
     MIAME
@@ -9,7 +6,7 @@ import RCall: rcopy, sexp, sexpclass, protect, unprotect, setclass!, RClass, S4S
 An `MIAME` object is a container for storing metadata associated with an experiment.
 It follows the `MIAME` class from the R package from Bioconductor: `Biobase`.
 
-# See also 
+# See also
 [`abstract`](@ref)
 [`info`](@ref)
 [`hybridizations`](@ref)
@@ -82,15 +79,15 @@ end
 """
     abstract(m::MIAME)::String
 
-Extracts the abstract from an MIAME object. 
+Extracts the abstract from an MIAME object.
 """
 abstract(m::MIAME) = m.abstract
 
 """
     info(m::MIAME)::NamedTuple
 
-Returns a `NamedTuple` with the name, lab, contact, title, and url fields of an MIAME object. 
-Similar to the `expinfo` function in the R package from Bioconductor: `Biobase`.    
+Returns a `NamedTuple` with the name, lab, contact, title, and url fields of an MIAME object.
+Similar to the `expinfo` function in the R package from Bioconductor: `Biobase`.
 """
 function info(m::MIAME)
     return (; name=m.name,
@@ -103,21 +100,21 @@ end
 """
     hybridizations(m::MIAME)::Vector{String}
 
-Extracts the hybridizations from an MIAME object. 
+Extracts the hybridizations from an MIAME object.
 """
 hybridizations(m::MIAME) = m.hybridizations
 
 """
     norm_controls(m::MIAME)::Vector{String}
 
-Extracts the normalization controls from an MIAME object such as house keeping genes. 
+Extracts the normalization controls from an MIAME object such as house keeping genes.
 """
 norm_controls(m::MIAME) = m.norm_controls
 
 """
     other(m::MIAME)::Dict{Symbol,String}
 
-Extracts the other metadata from an MIAME object. This can include any additional information 
+Extracts the other metadata from an MIAME object. This can include any additional information
 that is not covered by the other fields.
 
 """
@@ -134,7 +131,7 @@ preprocessing(m::MIAME) = m.preprocessing
 """
     pub_med_id(m::MIAME)::String
 
-Extracts the pubmed id from an MIAME object. 
+Extracts the pubmed id from an MIAME object.
 """
 pub_med_id(m::MIAME) = m.pub_med_id
 
@@ -169,95 +166,4 @@ function merge(m1::MIAME, m2::MIAME)
                  other=new_other)
 end
 
-function rcopy(::Type{MIAME}, s::Ptr{S4Sxp})
-    R"""
-
-    s <- $s
-    na <- s@name
-    c <- s@contact
-    abs <- s@abstract
-    id <- s@pubMedIds
-    hyb <- s@hybridizations
-    pre <- s@preprocessing
-    lab <- s@lab
-    title <- s@title
-    samples <- s@samples
-    nom <- s@normControls
-    url <- s@url
-    oth <- s@other
-    """
-
-    na = @rget na
-    c = @rget c
-    abs = @rget abs
-    id = @rget id
-    hyb = @rget hyb
-    pre = @rget pre
-    lab = @rget lab
-    title = @rget title
-    samples = @rget samples
-    nom = @rget nom
-    url = @rget url
-    oth = @rget oth
-
-    # If other is an empty list, then we convert it to a Dict
-    if length(oth) == 0
-        oth = Dict{Symbol,String}()
-    end
-
-    return MIAME(;
-                 name=na,
-                 lab=lab,
-                 contact=c,
-                 title=title,
-                 abstract=abs,
-                 url=url,
-                 samples=samples,
-                 hybridizations=hyb,
-                 norm_controls=nom,
-                 preprocessing=pre,
-                 pub_med_id=id,
-                 other=oth)
-end
-
-function sexp(::Type{RClass{:MIAME}}, miame::MIAME)
-    data = Dict("name" => miame.name,
-                "lab" => miame.lab,
-                "contact" => miame.contact,
-                "title" => miame.title,
-                "abstract" => miame.abstract,
-                "url" => miame.url,
-                "pub_med_id" => miame.pub_med_id,
-                "samples" => miame.samples,
-                "hybridizations" => miame.hybridizations,
-                "norm_controls" => miame.norm_controls,
-                "preprocessing" => miame.preprocessing,
-                "version" => 1,
-                "other" => miame.other)
-
-    R"""
-    library(Biobase)
-
-    miam <- MIAME(
-        name = $(data["name"]),
-        lab = $(data["lab"]),
-        contact = $(data["contact"]),
-        title = $(data["title"]),
-        abstract = $(data["abstract"]),
-        url = $(data["url"]),
-        pubMedIds = $(data["pub_med_id"]),
-        samples = list($(data["samples"])),
-        hybridizations = list($(data["hybridizations"])),
-        normControls = list($(data["norm_controls"])),
-        preprocessing = list($(data["preprocessing"])),
-        other = $(data["other"])
-    )
-
-    """
-
-    miam_r = @rget miam
-
-    return sexp(miam_r)
-end
-
-sexpclass(m::MIAME) = RClass{:MIAME}
+# Note: R interoperability functions have been moved to ExpressionDataInterop.jl
